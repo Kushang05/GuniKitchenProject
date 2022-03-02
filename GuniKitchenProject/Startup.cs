@@ -1,4 +1,5 @@
 using GuniKitchenProject.Data;
+using GuniKitchenProject.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,9 +31,41 @@ namespace GuniKitchenProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+           
+            services
+                .AddDatabaseDeveloperPageExceptionFilter();
+
+            //services
+            //    .AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services
+               .AddIdentity<MyIdentityUser, MyIdentityRole>(options =>
+               {
+                   options.SignIn.RequireConfirmedAccount = true;
+
+                   options.Password.RequireLowercase = true;
+                   options.Password.RequireUppercase = true;
+                   options.Password.RequireDigit = true;
+                   options.Password.RequiredLength = 8;
+
+                   options.User.RequireUniqueEmail = true;
+
+               })
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders();
+
+            services
+                .ConfigureApplicationCookie(options =>
+                {
+                    options.LoginPath = "/Identity/Account/Login";
+                    options.LogoutPath = "/Identity/Account/Logout";
+                    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                    options.SlidingExpiration = true;
+
+                });
+
             services.AddRazorPages();
         }
 
@@ -61,6 +94,10 @@ namespace GuniKitchenProject
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                   name: "default",
+                   pattern: "{controller}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
         }

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GuniKitchenProject.Models;
 
 namespace GuniKitchenProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext 
+        : IdentityDbContext< MyIdentityUser, MyIdentityRole, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -14,3 +16,4 @@ namespace GuniKitchenProject.Data
         }
     }
 }
+    
