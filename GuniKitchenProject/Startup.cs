@@ -1,10 +1,12 @@
 using GuniKitchenProject.Data;
 using GuniKitchenProject.Models;
+using GuniKitchenProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,7 +49,8 @@ namespace GuniKitchenProject
                    options.Password.RequireLowercase = true;
                    options.Password.RequireUppercase = true;
                    options.Password.RequireDigit = true;
-                   options.Password.RequiredLength = 8;
+                   options.Password.RequiredLength = 6;
+                   options.Password.RequireNonAlphanumeric = true;
 
                    options.User.RequireUniqueEmail = true;
 
@@ -67,6 +70,9 @@ namespace GuniKitchenProject
                 });
 
             services.AddRazorPages();
+
+            services
+                .AddSingleton<IEmailSender, MyEmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

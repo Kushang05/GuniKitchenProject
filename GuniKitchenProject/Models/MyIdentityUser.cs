@@ -25,7 +25,7 @@ namespace GuniKitchenProject.Models
         [Required]
         [PersonalData]
         [Column(TypeName = "smalldatetime")]
-        public DataType DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "{0} ccannot be Empty!!")]
         public string Address { get; set; }
