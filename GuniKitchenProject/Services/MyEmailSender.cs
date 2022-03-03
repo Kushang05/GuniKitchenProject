@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+
 namespace GuniKitchenProject.Services
 {
     public class MyEmailSender : IEmailSender
@@ -54,7 +55,6 @@ namespace GuniKitchenProject.Services
                 EnableSsl = smtpServerSSL,
                 Port = smtpPort,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-
                 Credentials = new NetworkCredential(
                     userName: smtpUsername,
                     password: smtpPassword)
