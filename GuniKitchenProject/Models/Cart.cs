@@ -1,18 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System;
 
 namespace GuniKitchenProject.Models
-{
-    [Table("Orders")]
-    public class Order
+{ 
+    [Table("Carts")]
+    public class Cart
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderNo { get; set; }
+        public int CartId { get; set; }
 
-        [Display(Name ="Customer Id")]
+        [Display(Name = "Customer Id")]
         [ForeignKey(nameof(Order.User))]
         public Guid UserId { get; set; }
         public MyIdentityUser User { get; set; }
@@ -24,21 +23,13 @@ namespace GuniKitchenProject.Models
         public int ProductId { get; set; }
         [Display(Name = "Product Name")]
         public Product Product { get; set; }
+    
+
+        [Required(ErrorMessage ="{0} cannot be zero")]
+        public int Qualtity { get; set; }
 
 
-        [Required]
-        public int Quantity { get; set; }
-
-
-        [Required]
+        [Required(ErrorMessage ="{0} cannot be Zero!!")]
         public int Prize { get; set; }
-
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime OrderDate { get; set; }
-
-
-
-
     }
 }

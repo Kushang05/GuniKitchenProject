@@ -14,29 +14,27 @@ namespace GuniKitchenProject.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProductId { get; set; }
 
-        [Display(Name = "Product Category")]
-        [Required(ErrorMessage = "{0} cannot be empty.")]
-        public string ProductCategory { get; set; }
-
-        [Display(Name = "Product Name")]
+        [Display(Name = "Item")]
         [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(20, ErrorMessage = "{0} cannot be more than {1} characters.")]
         public string ProductName { get; set; }
 
-        [Display(Name = "Product Description")]
+        [Display(Name = "Category")]
+        [ForeignKey(nameof(Product.Category))]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
+        [Display(Name = "Description")]
         [Required(ErrorMessage = "{0} cannot be empty.")]
         [StringLength(100, ErrorMessage = "{0} cannot be more than {1} characters.")]
         public string ProductDescription { get; set; }
 
-        [Display(Name = "Product Image")]
-        [Required(ErrorMessage = "{0} cannot be empty.")]
-        public string ProductImage { get; set; }
 
-        [Display(Name = "Product Price")]
+        [Display(Name = "Price")]
         [Required(ErrorMessage = "{0} cannot be empty.")]
-        public decimal ProductPrice { get; set; }
+        public int ProductPrice { get; set; }
 
-        [Display(Name = "Product Size")]
+        [Display(Name = "Size")]
         public string ProductSize { get; set; }
     }
 }
