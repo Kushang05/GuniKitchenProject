@@ -1,14 +1,10 @@
-﻿using System;
+﻿using GuniKitchenProject.Models;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace GuniKitchenProject.Models
+namespace GuniKitchenProject.ViewModel
 {
-    [Table("Products")]
-    public class Product
+    public class ProductViewModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

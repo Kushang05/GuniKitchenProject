@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using GuniKitchenProject.Models.Enums;
 
 namespace GuniKitchenProject.Areas.Identity.Pages.Account
 {
@@ -79,6 +80,10 @@ namespace GuniKitchenProject.Areas.Identity.Pages.Account
             [PersonalData]
             public DateTime DateOfBirth { get; set; }
 
+            [Required(ErrorMessage ="Please chose the option that describe your Gender")]
+            [Display(Name ="Gender")]
+            public MyIdentityGenders Gender { get; set; }
+
             [Required(ErrorMessage = "{0} ccannot be Empty!!")]
             public string Address { get; set; }
 
@@ -107,6 +112,7 @@ namespace GuniKitchenProject.Areas.Identity.Pages.Account
                     MobileNo = Input.MobileNo,
                     DateOfBirth = Input.DateOfBirth,
                     Address = Input.Address,
+                    Gender = Input.Gender,
                     IsAdminUser = Input.IsAdminUser
 
                 };
@@ -123,8 +129,12 @@ namespace GuniKitchenProject.Areas.Identity.Pages.Account
                             pageHandler: null,
                             values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                             protocol: Request.Scheme);
+                    
+                    //Comment if working in private network
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    
+                    
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });

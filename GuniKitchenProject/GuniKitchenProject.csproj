@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\MenuController.cs" />
     <Compile Remove="Models\Cart.cs" />
-    <Compile Remove="Models\Order.cs" />
     <Compile Remove="Models\Payment.cs" />
   </ItemGroup>
 

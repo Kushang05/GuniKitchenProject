@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
+using GuniKitchenProject.Models.Enums;
 
 namespace GuniKitchenProject.Models
 {
@@ -29,6 +30,11 @@ namespace GuniKitchenProject.Models
 
         [Required(ErrorMessage = "{0} ccannot be Empty!!")]
         public string Address { get; set; }
+
+        [Required]
+        [PersonalData]
+        [Display(Name ="Gender")]
+        public MyIdentityGenders Gender { get; set; }
 
         [Display(Name = "Is Admin User")]
         [Required]

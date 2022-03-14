@@ -19,23 +19,23 @@ namespace GuniKitchenProject.Models
 
 
         [Display(Name = "Product Name")]
-        [Required]
+        [Required] 
         [ForeignKey(nameof(Order.Product))]
         public int ProductId { get; set; }
         [Display(Name = "Product Name")]
         public Product Product { get; set; }
 
 
+        //[Required]
+        //public int Quantity { get; set; }
+
+
+        //[Required]
+        //public int Prize { get; set; }
+
         [Required]
-        public int Quantity { get; set; }
-
-
-        [Required]
-        public int Prize { get; set; }
-
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public DateTime OrderDate { get; set; }
+        [DataType(DataType.DateTime)]
+        public static DateTime Now { get;  }
 
 
 

@@ -11,7 +11,8 @@ namespace GuniKitchenProject.Data
         : IdentityDbContext< MyIdentityUser, MyIdentityRole, Guid>
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; } 
+        public DbSet<Order> Orders { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
